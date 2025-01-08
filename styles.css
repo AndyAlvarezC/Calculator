@@ -1,9 +1,13 @@
 :root {
-    --main-bc-color: #000;
-    --seconday-bc-color: #1A1A1A; 
-    --primary-color: #FFFFFF;
-    --secondary-color: #2E2E2E;
-    --hover-color: #4D4D4D;
+    --main-bc-color: #0a0a0a;
+    --secondary-bc-color: #1c1c1c;
+    --primary-color: #fff;
+    --accent-color: #00ff99;
+    --button-bg: #333;
+    --button-hover: #00ff99;
+    --input-bg: #1e1e1e;
+    --input-border: #00ff99;
+    --input-focus-bg: #333;
 }
 
 * {
@@ -14,11 +18,27 @@
 }
 
 body {
+    background-image: url(mathematical.webp);
+    background-size: cover;
+    background-position: center;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: var(--main-bc-color);
+    font-family: 'Roboto', sans-serif;
+    position: relative;
+    overflow: hidden;
+}
+
+body::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    filter: brightness(0.5);
 }
 
 .mainDiv {
@@ -26,96 +46,102 @@ body {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    margin: auto;
     width: 35rem;
     max-width: 100%;
     min-height: 40rem;
-    max-height: 100%;
-    background: var(--seconday-bc-color);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    border-radius: 0.5rem;
-    padding: 1rem;
+    background: var(--secondary-bc-color);
+    border-radius: 1rem;
+    box-shadow: 0 10px 30px rgba(0, 255, 153, 0.5), 0 4px 10px rgba(0, 0, 0, 0.5); /* Sombra más pronunciada */
+    padding: 2rem;
+    position: relative;
+    z-index: 1000;
 }
-.inputDiv{
+
+.inputDiv {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 85%;
-    margin: 0.5rem 0;
+    margin-bottom: 2rem;
 }
 
 input {
     width: 100%;
     height: 4rem;
     padding: 0.5rem;
-    font-size: 1.5rem;
+    font-size: 2rem;
     text-align: right;
     color: var(--primary-color);
+    background: var(--input-bg);
+    border: 2px solid var(--input-border);
+    border-radius: 0.5rem;
     outline: none;
-    border: none;
-    letter-spacing: 0.1rem;
-    border-radius: 0.3rem;
-    background: var(--main-bc-color);
-    border: 2px solid var(--hover-color);
-    transition: border-color 0.3s, box-shadow 0.3s;
+    transition: 0.3s;
+    box-shadow: 0 3px 10px rgba(0, 255, 153, 0.4);
 }
 
 input:focus {
-    border-color: var(--hover-color);
-    box-shadow: 0 0 10px var(--hover-color);
-}
-
-input[type="number"]::-webkit-outer-spin-button, 
-input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-input[type="number"] {
-    -moz-appearance: textfield;
+    background: var(--input-focus-bg);
+    border-color: var(--input-border);
+    box-shadow: 0 0 10px var(--input-border);
 }
 
 .buttonsDiv {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: auto auto auto;
-    gap: 1rem;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 1rem;
     padding: 1rem;
     width: 90%;
+    margin-bottom: 1rem;
 }
 
-.buttonNumbers {
-    font-size: 1.2rem;
-    padding: 1rem;
+.buttonNumbers, .buttonCalculate {
+    font-size: 1.5rem;
+    padding: 1.5rem;
     border: none;
-    border-radius: 0.3rem;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 0.5rem;
+    background: var(--button-bg);
+    color: var(--primary-color);
     cursor: pointer;
-    transition: background 0.3s;
-    background: var(--main-bc-color);
+    transition: all 0.3s;
+    box-shadow: 0 4px 10px rgba(0, 255, 153, 0.3);
 }
 
-.buttonNumbers:hover {
-    background: var(--hover-color);
+.buttonNumbers:hover, .buttonCalculate:hover {
+    background: var(--button-hover);
+    box-shadow: 0 0 20px rgba(0, 255, 153, 0.8);
 }
 
-.buttonNumbers:last-child{
-    grid-column: 2;
-    justify-content: center;
+.buttonNumbers:active, .buttonCalculate:active {
+    transform: translateY(4px);
+    box-shadow: 0 4px 15px rgba(0, 255, 153, 0.5);
 }
 
 .buttonCalculate {
     width: 100%;
-    font-size: 1.2rem;
-    padding: 1rem;
-    border: none;
-    border-radius: 0.3rem;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    cursor: pointer;
-    transition: background 0.3s;
-    background: var(--main-bc-color);
+    font-size: 1.5rem;
+    padding: 1.5rem;
+    background: var(--accent-color);
+    border-radius: 0.5rem;
+    color: var(--primary-color);
+    box-shadow: 0 4px 15px rgba(0, 255, 153, 0.6);
 }
 
 .buttonCalculate:hover {
-    background: var(--hover-color);
+    background: #00cc88;
+}
+
+@media (max-width: 768px) {
+    .mainDiv {
+        width: 90%;
+    }
+
+    input {
+        font-size: 1.5rem;
+    }
+
+    .buttonNumbers, .buttonCalculate {
+        font-size: 1.2rem;
+        padding: 1.2rem;
+    }
 }
